@@ -42,7 +42,6 @@ export default {
     })
   },
   methods: {
-    // Можно ли использовать геттер isLoggedIn из [auth], чтобы вычислить значение для метода handleLike?
     handleLike() {
       if (this.isLoggedIn) {
         this.$store.dispatch(addToFavoritesActionTypes.addToFavorites, {
