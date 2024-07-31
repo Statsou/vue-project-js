@@ -69,8 +69,10 @@ export default {
         })
     }
   },
-  mounted() {
-    this.$store.dispatch(actionTypes.resetErrors)
+  unmounted() {
+    if (this.validationErrors) {
+      this.$store.dispatch(actionTypes.resetErrors)
+    }
   }
 }
 </script>
