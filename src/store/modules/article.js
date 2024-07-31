@@ -56,7 +56,7 @@ const actions = {
     })
   },
   [actionTypes.deleteArticle](context, {slug}) {
-    return new Promise(resolve =>{
+    return new Promise(resolve => {
       context.commit(mutationTypes.deleteArticleStart, slug)
 
       articleApi

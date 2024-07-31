@@ -44,11 +44,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import McvValidationErrors from '@/components/ValidationErrors'
 import { actionTypes } from '@/store/modules/auth'
-import { getterTypes } from '@/store/modules/auth';
 
 export default {
   name: 'McvRegister',
@@ -63,9 +62,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      isSubmitting: getterTypes.isSubmitting,
-      validationErrors: getterTypes.validationErrors
+    ...mapState({
+      isSubmitting: state => state.auth.isSubmitting,
+      validationErrors: state => state.auth.validationErrors
     })
   },
   methods: {
@@ -81,6 +80,9 @@ export default {
           this.$router.push({name: 'globalFeed'})
         })
     }
+  },
+  mounted() {
+    this.$store.dispatch(actionTypes.resetErrors)
   }
 }
 </script>

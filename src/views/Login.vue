@@ -68,6 +68,9 @@ export default {
           this.$router.push({name: 'globalFeed'})
         })
     }
+  },
+  mounted() {
+    this.$store.dispatch(actionTypes.resetErrors)
   }
 }
 </script>

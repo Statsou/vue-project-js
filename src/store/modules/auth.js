@@ -26,12 +26,14 @@ export const mutationTypes = {
   updateCurrentUserSuccess: '[auth] updateCurrentUserSuccess',
   updateCurrentUserFailure: '[auth] updateCurrentUserFailure',
 
-  logout: '[auth] logout'
+  logout: '[auth] logout',
+  resetValidationErrors: '[auth] resetValidationErrors'
 }
 
 export const actionTypes = {
   register: '[auth] register',
   login: '[auth] login',
+  resetErrors: '[auth] resetErrors',
   getCurrentUser: '[auth] getCurrentUser',
   updateCurrentUser: '[auth] updateCurrentUser',
   logout: '[auth] logout'
@@ -55,14 +57,7 @@ export const getters = {
   },
   [getterTypes.isAnonymus]: state => {
     return state.isLoggedIn === false
-  },
-
-  [getterTypes.isSubmitting]: state => {
-    return Boolean(state.isSubmitting)
-  },
-  [getterTypes.validationErrors]: state => {
-    return state.validationErrors
-  },
+  }
 }
 
 const mutations = {
@@ -92,6 +87,10 @@ const mutations = {
   [mutationTypes.loginFailure](state, payload) {
     state.isSubmitting = false
     state.validationErrors = payload
+  },
+
+  [mutationTypes.resetValidationErrors](state) {
+    state.validationErrors = null
   },
 
   [mutationTypes.getCurrentUserStart](state) {
@@ -154,6 +153,13 @@ const actions = {
           context.commit(mutationTypes.loginFailure, result.response.data.errors)
           console.log('result errors', result)
         })
+    })
+  },
+
+  [actionTypes.resetErrors](context) {
+    return new Promise (resolve => {
+      context.commit(mutationTypes.resetValidationErrors)
+      resolve()
     })
   },
 
