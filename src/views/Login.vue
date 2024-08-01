@@ -69,7 +69,7 @@ export default {
         })
     }
   },
-  unmounted() {
+  beforeRouteLeave() {
     if (this.validationErrors) {
       this.$store.dispatch(actionTypes.resetErrors)
     }
